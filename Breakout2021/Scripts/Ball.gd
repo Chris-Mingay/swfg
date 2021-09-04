@@ -18,3 +18,6 @@ func _physics_process(delta):
 			var direction = get_position() - body.get_node("Anchor").get_global_position()
 			var velocity = direction.normalized() * min(speed+SPEEDUP, MAXSPEED)
 			set_linear_velocity(velocity)
+	
+	if get_position().y > get_viewport_rect().end.y:
+		queue_free()
