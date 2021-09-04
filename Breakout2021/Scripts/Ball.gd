@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-const SPEEDUP = 4
+const SPEEDUP = 40
 const MAXSPEED = 300
 
 func _ready():
@@ -16,5 +16,5 @@ func _physics_process(delta):
 		if body.get_name() == "Paddle":
 			var speed = get_linear_velocity().length()
 			var direction = get_position() - body.get_node("Anchor").get_global_position()
-			var velocity = direction.normalized() * min(speed+SPEEDUP*delta, MAXSPEED * delta)
+			var velocity = direction.normalized() * min(speed+SPEEDUP, MAXSPEED)
 			set_linear_velocity(velocity)
