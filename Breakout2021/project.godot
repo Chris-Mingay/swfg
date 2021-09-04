@@ -8,6 +8,28 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "RigidBody2D",
+"class": "Ball",
+"language": "GDScript",
+"path": "res://Scripts/Ball.gd"
+}, {
+"base": "StaticBody2D",
+"class": "Brick",
+"language": "GDScript",
+"path": "res://Scripts/Brick.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Paddle",
+"language": "GDScript",
+"path": "res://Scripts/Paddle.gd"
+} ]
+_global_script_class_icons={
+"Ball": "",
+"Brick": "",
+"Paddle": ""
+}
+
 [application]
 
 config/name="Breakout2021"
