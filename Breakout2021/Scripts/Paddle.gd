@@ -1,10 +1,10 @@
 extends KinematicBody2D
 class_name Paddle
 
-# const ball_scene = preload("res://Scenes/Ball.tscn")
+var ball_scene
 
 func _ready():
-	# set_process_input(true)
+	ball_scene = load("res://Scenes/Ball.tscn")
 	pass
 
 func _physics_process(delta):
