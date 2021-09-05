@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Textures/BallSpriteSheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Ball.gd" type="Script" id=2]
 [ext_resource path="res://Gradients/powerbar.tres" type="Texture" id=3]
 [ext_resource path="res://Shaders/powerbar.gdshader" type="Shader" id=4]
 [ext_resource path="res://Scripts/CircleDrawer.gd" type="Script" id=5]
+[ext_resource path="res://Textures/BlueNoise.png" type="Texture" id=6]
+[ext_resource path="res://Shaders/DirectionalBlur.shader" type="Shader" id=7]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -13,12 +15,20 @@ bounce = 1.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 4.10634
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=3]
 shader = ExtResource( 4 )
 shader_param/mix_amount = 1.0
 shader_param/gradient = ExtResource( 3 )
 
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 7 )
+shader_param/angle_degrees = null
+shader_param/Samples = 32
+shader_param/strength = null
+shader_param/noise = ExtResource( 6 )
+
 [node name="Ball" type="RigidBody2D"]
+modulate = Color( 1.5, 1.5, 1.5, 1 )
 position = Vector2( 352, 288 )
 collision_layer = 524288
 collision_mask = 524289
@@ -41,16 +51,18 @@ __meta__ = {
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [node name="LineAim" type="Line2D" parent="."]
-material = SubResource( 4 )
+material = SubResource( 3 )
 points = PoolVector2Array( 0, 0, 20, 20 )
 default_color = Color( 1, 1, 1, 1 )
 begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1.5, 1.5, 1.5, 1 )
+material = SubResource( 4 )
 texture = ExtResource( 1 )
-hframes = 16
-vframes = 16
+hframes = 4
+vframes = 4
 __meta__ = {
 "_edit_lock_": true
 }

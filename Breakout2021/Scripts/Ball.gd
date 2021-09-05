@@ -20,6 +20,9 @@ export var TARGET_MAX_SPEED = 100
 var attract_vector = Vector2(0,0)
 
 func _ready():
+	
+	$Sprite.set_material($Sprite.get_material().duplicate())
+	
 	Sfx_HitCore = load("res://SoundEffects/IMPACT Hit Short Clink 01.wav")
 	Sfx_HitBrick = load("res://SoundEffects/DESTRUCTION Break Impact Wood 04.wav")
 	Sfx_HitBrickDud = load("res://SoundEffects/IMPACT Metal Hit Short 01.wav")
@@ -36,6 +39,10 @@ func _ready():
 func _physics_process(delta):
 	
 	_update_line_aim()
+	
+	$Sprite.material.set_shader_param("angle_degrees",rad2deg(get_linear_velocity().angle()))
+	# $Sprite.material.set_shader_param("strength",0.1)
+	$Sprite.material.set_shader_param("strength",get_linear_velocity().length() / (MAXSPEED * 3))
 	
 	match state:
 		STATE.READY:
