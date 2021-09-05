@@ -2,7 +2,7 @@ extends Node2D
 
 const ball_scene = preload("res://Scenes/Ball.tscn")
 
-const INIT_SPREAD = 10
+const INIT_SPREAD = 50
 
 #var rng = RandomNumberGenerator.new()
 
@@ -17,3 +17,4 @@ func _input(event):
 		ball.set_position(pos)
 		ball.set_linear_velocity(Vector2(rand_range(-INIT_SPREAD,INIT_SPREAD),rand_range(-INIT_SPREAD,INIT_SPREAD)))
 		add_child(ball)
+

@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Textures/BallSpriteSheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Ball.gd" type="Script" id=2]
+[ext_resource path="res://Gradients/powerbar.tres" type="Texture" id=3]
+[ext_resource path="res://Shaders/powerbar.gdshader" type="Shader" id=4]
+[ext_resource path="res://Scripts/CircleDrawer.gd" type="Script" id=5]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -10,9 +13,15 @@ bounce = 1.0
 [sub_resource type="CircleShape2D" id=2]
 radius = 4.10634
 
+[sub_resource type="ShaderMaterial" id=4]
+shader = ExtResource( 4 )
+shader_param/mix_amount = 1.0
+shader_param/gradient = ExtResource( 3 )
+
 [node name="Ball" type="RigidBody2D"]
 position = Vector2( 352, 288 )
 collision_layer = 524288
+collision_mask = 524289
 mode = 2
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.0
@@ -23,6 +32,21 @@ linear_damp = 0.0
 angular_damp = 0.0
 script = ExtResource( 2 )
 
+[node name="Collision" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="LineAim" type="Line2D" parent="."]
+material = SubResource( 4 )
+points = PoolVector2Array( 0, 0, 20, 20 )
+default_color = Color( 1, 1, 1, 1 )
+begin_cap_mode = 2
+end_cap_mode = 2
+
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 16
@@ -31,12 +55,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Collision" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="CircleDrawer" type="Node2D" parent="."]
+visible = false
+script = ExtResource( 5 )
 
 [connection signal="body_entered" from="." to="." method="_on_Ball_body_entered"]

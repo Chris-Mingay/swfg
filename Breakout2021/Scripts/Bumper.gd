@@ -4,21 +4,12 @@ class_name Bumper
 
 var activation_timer
 var active = false
-export var active_delay = 0.25
+export var active_delay = 0.1
 
 const ActivationSound = preload("res://SoundEffects/POP Brust 11.wav")
 
-var rng = RandomNumberGenerator.new()
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	rng.randomize()
-	pass # Replace with function body.
+	pass
 	
 func _process(delta):
     update()
